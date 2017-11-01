@@ -50,19 +50,12 @@ app.post('/save', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
-    res.send(req.body);
-    // var problem = {
-    //     title: 'Quadratic Equation Test 2',
-    //     category: 'Factoring',
-    //     difficulty: 'Medium',
-    //     latex: '/sqrt(x^2 + 5)'
-    // }
-    // Problem.create(problem, (err, savedProblem) => {
-    //     if (err){
-    //         console.log(err);
-    //     }else{
-    //         console.log('the problem was saved: ' + savedProblem);
-    //         res.send(savedProblem);
-    //     }
-    // });
+    Problem.create(problem, (err, savedProblem) => {
+        if (err){
+            console.log(err);
+        }else{
+            console.log('the problem was saved: ' + savedProblem);
+            res.send(savedProblem);
+        }
+    });
 });
