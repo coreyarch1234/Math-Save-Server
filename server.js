@@ -50,6 +50,7 @@ app.post('/save', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
+    res.send(req.body);
     // var problem = {
     //     title: 'Quadratic Equation Test 2',
     //     category: 'Factoring',
