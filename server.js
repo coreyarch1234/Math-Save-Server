@@ -2,12 +2,13 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 const app = express();
 const bodyParser = require('body-parser');
-
 const port = 3000;
-
 const mongodb = require("mongodb");
 // Setting up Database
 const mongoose = require('mongoose');
+
+//import problem model
+const Problem = require('./models/problem');
 
 // Use bluebird
 mongoose.Promise = require('bluebird');
@@ -43,4 +44,20 @@ app.get('/', (req, res) => {
     res.send({
         latex: 'x^2 + 5'
     });
-})
+});
+
+app.get('/save', (req, res) => {
+    var problem = {
+        title: 'Quadratic Equation Test 2',
+        category: 'Factoring',
+        difficulty: 'Medium'
+    }
+    Problem.create(problem, (err, savedProblem) => {
+        if (err){
+            console.log(err);
+        }else{
+            console.log('the problem was saved: ' + savedProblem);
+            res.send(savedProblem);
+        }
+    });
+});
