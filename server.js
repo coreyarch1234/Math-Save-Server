@@ -1,10 +1,46 @@
-var express = require('express');
-var exphbs  = require('express-handlebars');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require('express');
+const exphbs  = require('express-handlebars');
+const app = express();
+const bodyParser = require('body-parser');
 
-var port = 3000;
+const port = 3000;
 
-var mongodb = require("mongodb");
+const mongodb = require("mongodb");
 // Setting up Database
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+
+// Use bluebird
+mongoose.Promise = require('bluebird');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mathsave', {
+  useMongoClient: true,
+  /* other options */
+});
+
+//body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+// Setting templating engine
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));
+
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+    app.listen(process.env.PORT || port, function() {
+        console.log('server started: ' + port);
+        console.log('env port' + process.env.PORT);
+    });
+});
+
+app.get('/', (req, res) => {
+    res.send({
+        latex: 'x^2 + 5'
+    });
+})
