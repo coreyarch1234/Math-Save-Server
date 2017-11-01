@@ -5,9 +5,10 @@ var Schema = mongoose.Schema;
 var ProblemSchema = new Schema({
   createdAt            : { type: Date, default: Date() },
   updatedAt            : { type: Date, default: Date() },
-  title                : { type: String, unique: false, required: false },
-  category             : { type: String, unique: false, required: false },
-  difficulty           : { type: String, unique: false, required: false }
+  title                : { type: String, unique: false, required: true },
+  category             : { type: String, unique: false, required: true },
+  difficulty           : { type: String, unique: false, required: true },
+  latex                : { type: String, unique: false, required: true }
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

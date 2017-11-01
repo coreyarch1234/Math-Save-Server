@@ -50,7 +50,8 @@ app.get('/save', (req, res) => {
     var problem = {
         title: 'Quadratic Equation Test 2',
         category: 'Factoring',
-        difficulty: 'Medium'
+        difficulty: 'Medium',
+        latex: '/sqrt(x^2 + 5)'
     }
     Problem.create(problem, (err, savedProblem) => {
         if (err){
