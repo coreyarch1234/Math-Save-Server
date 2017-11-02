@@ -3,12 +3,14 @@ const exphbs  = require('express-handlebars');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 3000;
-const mongodb = require("mongodb");
+const mongodb = require('mongodb');
 // Setting up Database
 const mongoose = require('mongoose');
 
 //import problem model
 const Problem = require('./models/problem');
+
+var katex = require('katex');
 
 // Use bluebird
 mongoose.Promise = require('bluebird');
@@ -64,5 +66,5 @@ app.post('/save', (req, res) => {
 app.get('/latex', (req, res) => {
     //function to return html var
     var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-    res.render('main', { html: html });
+    res.render('layouts/main', { html: html });
 });
