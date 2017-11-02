@@ -59,3 +59,10 @@ app.post('/save', (req, res) => {
         }
     });
 });
+
+//test server side katex rendering
+app.get('/latex', (req, res) => {
+    //function to return html var
+    var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
+    res.render('main', { html: html });
+});
