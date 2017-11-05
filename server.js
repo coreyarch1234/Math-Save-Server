@@ -64,7 +64,7 @@ app.post('/save', (req, res) => {
 });
 
 //test server side katex rendering
-app.get('/latex', (req, res) => {
+app.post('/latex', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
