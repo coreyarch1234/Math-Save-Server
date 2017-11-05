@@ -56,6 +56,7 @@ app.post('/save', (req, res) => {
         if (err){
             console.log(err);
         }else{
+            //send rendered latex with it.
             console.log('the problem was saved: ' + savedProblem);
             res.send(savedProblem);
         }
@@ -64,7 +65,20 @@ app.post('/save', (req, res) => {
 
 //test server side katex rendering
 app.get('/latex', (req, res) => {
+    var problem = req.body;
+    console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
+    console.log(req.body);
+    Problem.create(problem, (err, savedProblem) => {
+        if (err){
+            console.log(err);
+        }else{
+            //send rendered latex with it.
+            var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
+            console.log('the problem was saved: ' + savedProblem);
+            res.send({html:html});
+        }
+    });
     //function to return html var
-    var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-    res.render('layouts/main', { html: html });
+    // var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
+    // res.render('layouts/main', { html: html });
 });

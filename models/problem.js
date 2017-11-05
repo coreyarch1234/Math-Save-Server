@@ -6,7 +6,7 @@ var ProblemSchema = new Schema({
   createdAt            : { type: Date, default: Date() },
   updatedAt            : { type: Date, default: Date() },
   title                : { type: String, unique: false, required: true },
-  category             : { type: String, unique: false, required: true },
+  topic                : { type: String, unique: false, required: true },
   latex                : { type: String, unique: false, required: true }
 });
 
