@@ -43,9 +43,8 @@ db.once('open', function() {
 });
 
 app.get('/', (req, res) => {
-    res.send({
-        latex: 'x^2 + 5'
-    });
+    var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
+    res.render('layouts/main', { html: html });
 });
 
 app.post('/save', (req, res) => {
