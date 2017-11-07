@@ -72,9 +72,14 @@ app.post('/latex', (req, res) => {
             console.log(err);
         }else{
             //send rendered latex with it.
-            var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-            console.log('the problem was saved: ' + savedProblem);
-            res.send({html:html});
+            // var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
+            // console.log('the problem was saved: ' + savedProblem);
+            // res.send({html:html});
+            var renderedLatex = katex.renderToString(savedProblem.latex);
+            res.send({
+                problem: problem,
+                renderedLatex: renderedLatex
+            });
         }
     });
     //function to return html var
