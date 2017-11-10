@@ -43,26 +43,16 @@ db.once('open', function() {
 });
 
 app.get('/', (req, res) => {
-    var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-    res.render('layouts/main', { html: html });
-});
-
-app.post('/save', (req, res) => {
-    var problem = req.body;
-    console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
-    console.log(req.body);
-    Problem.create(problem, (err, savedProblem) => {
-        if (err){
+    Problem.find({}, (err, problems) => {
+        if (err) {
             console.log(err);
         }else{
-            //send rendered latex with it.
-            console.log('the problem was saved: ' + savedProblem);
-            res.send(savedProblem);
+            console.log(problems);
+            res.send(problems);
         }
-    });
+    })
 });
 
-//test server side katex rendering
 app.post('/latex', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
@@ -71,18 +61,11 @@ app.post('/latex', (req, res) => {
         if (err){
             console.log(err);
         }else{
-            //send rendered latex with it.
-            // var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-            // console.log('the problem was saved: ' + savedProblem);
-            // res.send({html:html});
             var renderedLatex = katex.renderToString(savedProblem.latex);
             res.send({
-                problem: problem,
-                renderedLatex: renderedLatex
+                problem: problem, //latex
+                renderedLatex: renderedLatex //latex html string
             });
         }
     });
-    //function to return html var
-    // var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-    // res.render('layouts/main', { html: html });
 });
