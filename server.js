@@ -43,7 +43,8 @@ db.once('open', function() {
 });
 
 app.get('/', (req, res) => {
-    Problem.find({}, (err, problems) => {
+
+    Problem.find({}).sort({_id:-1}).exec((err,problems) => {
         if (err) {
             console.log(err);
         }else{
@@ -51,6 +52,7 @@ app.get('/', (req, res) => {
             res.send(problems);
         }
     })
+
 });
 
 app.post('/latex', (req, res) => {
