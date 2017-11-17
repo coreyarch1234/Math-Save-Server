@@ -65,7 +65,7 @@ app.post('/latex', (req, res) => {
         title: problem.title,
         topic: problem.topic,
         latex: problem.latex,
-        renderedLatex: renderedLatex
+        renderedLatex: JSON.stringify({ html: latexHTML })
     }
     Problem.create(problem, (err, savedProblem) => {
         if (err){
