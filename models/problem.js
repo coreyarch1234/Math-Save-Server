@@ -7,7 +7,8 @@ var ProblemSchema = new Schema({
   updatedAt            : { type: Date, default: Date() },
   title                : { type: String, unique: false, required: true },
   topic                : { type: String, unique: false, required: true },
-  latex                : { type: String, unique: false, required: true }
+  latex                : { type: String, unique: false, required: true },
+  renderedLatex        : { type: String, unique: false, required: true }
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);
