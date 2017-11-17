@@ -59,14 +59,25 @@ app.post('/latex', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
+    var renderedLatex = katex.renderToString(problem.latex);
+    //add rendered latex to problem
+    problem = {
+        title: problem.title,
+        topic: problem.topic,
+        latex: problem.latex,
+        renderedLatex: renderedLatex
+    }
     Problem.create(problem, (err, savedProblem) => {
         if (err){
             console.log(err);
         }else{
-            var renderedLatex = katex.renderToString(savedProblem.latex);
+            // var renderedLatex = katex.renderToString(savedProblem.latex);
+            // res.send({
+            //     problem: problem, //latex
+            //     renderedLatex: renderedLatex //latex html string
+            // });
             res.send({
-                problem: problem, //latex
-                renderedLatex: renderedLatex //latex html string
+                problem: problem
             });
         }
     });
