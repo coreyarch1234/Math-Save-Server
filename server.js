@@ -65,7 +65,7 @@ app.post('/latex', (req, res) => {
         title: problem.title,
         topic: problem.topic,
         latex: problem.latex,
-        renderedLatex: `${renderedLatex}`
+        renderedLatex: renderedLatex
     }
     Problem.create(problem, (err, savedProblem) => {
         if (err){
