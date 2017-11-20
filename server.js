@@ -59,7 +59,7 @@ app.post('/latex', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
-    var renderedLatex = katex.renderToString(problem.latex);
+    // var renderedLatex = katex.renderToString(problem.latex);
     //add rendered latex to problem
     // problem = {
     //     title: problem.title,
@@ -73,7 +73,7 @@ app.post('/latex', (req, res) => {
         }else{
             var renderedLatex = katex.renderToString(savedProblem.latex);
             res.send({
-                problem: savedProblem, //latex
+                problem: problem, //latex
                 renderedLatex: renderedLatex //latex html string
             });
             // res.send({
