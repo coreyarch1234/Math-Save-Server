@@ -75,8 +75,8 @@ app.post('/latex', (req, res) => {
     console.log('--------------------------------------');
     // problem.renderedLatex = JSON.stringify(renderedLatex)
     // console.log(JSON.stringify(renderedLatex));
-    problem.renderedLatex = renderedLatex
-    console.log(renderedLatex);
+    problem.renderedLatex = `<span class="katex">`
+    console.log(problem.renderedLatex);
 
     // var p = new Problem(problem)
     // p.save().then().catch()
