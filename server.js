@@ -44,23 +44,33 @@ db.once('open', function() {
 
 app.get('/', (req, res) => {
 
+    var newProblems = []
+
     Problem.find({}).sort({_id:-1}).exec((err,problems) => {
         if (err) {
             console.log(err);
         }else{
-            console.log(problems);
-            res.send(problems);
+            for (problem of problems){
+                console.log(problem)
+                problem.renderedLatex =katex.renderToString(problem.latex);
+                newProblems.push(problem);
+
+            }
+            console.log('THE NEW PROBLEM ARRAY IS: ' + newProblems);
+            // console.log(problems);
+            res.send(newProblems);
         }
     })
 
 });
+
 
 app.post('/latex', (req, res) => {
     var problem = req.body;
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
 
-    var renderedLatex = katex.renderToString(problem.latex);
+    // var renderedLatex = katex.renderToString(problem.latex);
 
     //add rendered latex to problem
     // problem = {
@@ -70,13 +80,13 @@ app.post('/latex', (req, res) => {
     //     renderedLatex: JSON.stringify(renderedLatex)
     // }
 
-    console.log("**************************************");
-    console.log(renderedLatex);
-    console.log('--------------------------------------');
+    // console.log("**************************************");
+    // console.log(renderedLatex);
+    // console.log('--------------------------------------');
     // problem.renderedLatex = JSON.stringify(renderedLatex)
     // console.log(JSON.stringify(renderedLatex));
-    problem.renderedLatex = `<span class="katex">`
-    console.log(problem.renderedLatex);
+    // problem.renderedLatex = `<span class="katex">`
+    // console.log(problem.renderedLatex);
 
     // var p = new Problem(problem)
     // p.save().then().catch()
