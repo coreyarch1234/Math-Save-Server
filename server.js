@@ -61,24 +61,24 @@ app.post('/latex', (req, res) => {
     console.log(req.body);
     var renderedLatex = katex.renderToString(problem.latex);
     //add rendered latex to problem
-    problem = {
-        title: problem.title,
-        topic: problem.topic,
-        latex: problem.latex,
-        renderedLatex: JSON.stringify(renderedLatex)
-    }
+    // problem = {
+    //     title: problem.title,
+    //     topic: problem.topic,
+    //     latex: problem.latex,
+    //     renderedLatex: JSON.stringify(renderedLatex)
+    // }
     Problem.create(problem, (err, savedProblem) => {
         if (err){
             console.log(err);
         }else{
-            // var renderedLatex = katex.renderToString(savedProblem.latex);
-            // res.send({
-            //     problem: problem, //latex
-            //     renderedLatex: renderedLatex //latex html string
-            // });
+            var renderedLatex = katex.renderToString(savedProblem.latex);
             res.send({
-                problem: savedProblem
+                problem: savedProblem, //latex
+                renderedLatex: renderedLatex //latex html string
             });
+            // res.send({
+            //     problem: savedProblem
+            // });
         }
     });
 });
