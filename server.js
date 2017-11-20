@@ -52,8 +52,15 @@ app.get('/', (req, res) => {
         }else{
             for (problem of problems){
                 console.log(problem)
-                problem.renderedLatex = katex.renderToString(problem.latex);
-                newProblems.push(problem);
+
+                var renderedLatex = katex.renderToString(problem.latex);
+                newProblems.push({
+                    title: problem.title,
+                    topic: problem.topic,
+                    latex: problem.latex,
+                    renderedLatex: renderedLatex
+                });
+                // newProblems.push(problem);
 
             }
             console.log('THE NEW PROBLEM ARRAY IS: ' + newProblems);
@@ -95,13 +102,14 @@ app.post('/latex', (req, res) => {
         if (err){
             console.log(err);
         } else {
-            // var renderedLatex = katex.renderToString(savedProblem.latex);
+            var renderedLatex = katex.renderToString(savedProblem.latex);
             // res.send({
             //     problem: problem, //latex
             //     renderedLatex: renderedLatex //latex html string
             // });
             res.send({
-                problem: savedProblem
+                problem: savedProblem,
+                renderedLatex: renderedLatex
             });
         }
     });
