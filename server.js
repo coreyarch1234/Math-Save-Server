@@ -77,7 +77,7 @@ app.post('/latex', (req, res) => {
             //     renderedLatex: renderedLatex //latex html string
             // });
             res.send({
-                problem: problem
+                problem: savedProblem
             });
         }
     });
