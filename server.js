@@ -73,8 +73,10 @@ app.post('/latex', (req, res) => {
     console.log("**************************************");
     console.log(renderedLatex);
     console.log('--------------------------------------');
-    problem.renderedLatex = JSON.stringify(renderedLatex)
-    console.log(JSON.stringify(renderedLatex));
+    // problem.renderedLatex = JSON.stringify(renderedLatex)
+    // console.log(JSON.stringify(renderedLatex));
+    problem.renderedLatex = renderedLatex
+    console.log(renderedLatex);
 
     // var p = new Problem(problem)
     // p.save().then().catch()
