@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
         }else{
             for (problem of problems){
                 console.log(problem)
-                problem.renderedLatex =katex.renderToString(problem.latex);
+                problem.renderedLatex = katex.renderToString(problem.latex);
                 newProblems.push(problem);
 
             }
