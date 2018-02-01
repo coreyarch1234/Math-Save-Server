@@ -10,13 +10,11 @@
 
     <body>
         <div id='latexElement'>
-            {{{html}}}
+
         </div>
     </body>
     <script type="text/javascript">
-        // $(document).ready(function(){
-        //     katex.render("c = \\pm\\sqrt{a^2 + b^2}", document.getElementById('latexElement'));
-        // });
+        katex.render({{html}}, document.getElementById("latexElement"));
     </script>
 
 </html>
