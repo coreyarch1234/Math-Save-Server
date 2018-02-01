@@ -42,6 +42,22 @@ db.once('open', function() {
     });
 });
 
+
+
+app.get('/show', (req, res) => {
+
+    Problem.find({}).exec((err,problems) => {
+        if (err) {
+            console.log(err);
+        }else{
+            res.send(problems);
+        }
+    })
+
+});
+
+
+
 app.get('/', (req, res) => {
 
     var newProblems = []
@@ -60,11 +76,9 @@ app.get('/', (req, res) => {
                     latex: problem.latex,
                     renderedLatex: renderedLatex
                 });
-                // newProblems.push(problem);
 
             }
             console.log('THE NEW PROBLEM ARRAY IS: ' + newProblems);
-            // console.log(problems);
             res.send(newProblems);
         }
     })
@@ -77,36 +91,11 @@ app.post('/latex', (req, res) => {
     console.log('THE DATA PASSED FROM REACT NATIVE IS: ');
     console.log(req.body);
 
-    // var renderedLatex = katex.renderToString(problem.latex);
-
-    //add rendered latex to problem
-    // problem = {
-    //     title: problem.title,
-    //     topic: problem.topic,
-    //     latex: problem.latex,
-    //     renderedLatex: JSON.stringify(renderedLatex)
-    // }
-
-    // console.log("**************************************");
-    // console.log(renderedLatex);
-    // console.log('--------------------------------------');
-    // problem.renderedLatex = JSON.stringify(renderedLatex)
-    // console.log(JSON.stringify(renderedLatex));
-    // problem.renderedLatex = `<span class="katex">`
-    // console.log(problem.renderedLatex);
-
-    // var p = new Problem(problem)
-    // p.save().then().catch()
-
     Problem.create(problem, (err, savedProblem) => {
         if (err){
             console.log(err);
         } else {
             var renderedLatex = katex.renderToString(savedProblem.latex);
-            // res.send({
-            //     problem: problem, //latex
-            //     renderedLatex: renderedLatex //latex html string
-            // });
             res.send({
                 problem: savedProblem,
                 renderedLatex: renderedLatex
