@@ -61,9 +61,11 @@ app.get('/generate', (req, res) => {
         var random = Math.floor(Math.random() * count);
 
         Problem.findOne().skip(random).exec((err, problem) => {
-            const latex = problem.latex;
-            console.log(latex);
-            res.render('layouts/main', {html: latex});
+            // const latex = problem.latex;
+            // console.log(latex);
+            var renderedLatex = katex.renderToString(problem.latex);
+            res.render('layouts/main', {html: renderedLatex});
+            // res.render('layouts/main', {html: latex});
         })
     });
 })
