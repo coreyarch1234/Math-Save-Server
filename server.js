@@ -12,6 +12,8 @@ const Problem = require('./models/problem');
 
 var katex = require('katex');
 
+var specificTopics = require('./specific-topics');
+
 // Use bluebird
 mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mathsave', {
@@ -56,14 +58,12 @@ app.get('/show', (req, res) => {
 });
 
 app.get('/generate', (req, res) => {
-    Problem.count().exec((err, count) => {
-        // Get a random entry
-        var random = Math.floor(Math.random() * count);
-
-        Problem.findOne().skip(random).exec((err, problem) => {
-            var renderedLatex = katex.renderToString(problem.latex);
-            res.render('layouts/main', {html: renderedLatex, title: problem.title});
-        })
+    topicPromise = specificTopics();
+    topicPromise.then((results) => {
+        const any = results.Any[Math.floor(Math.random()*results.Any.length)];
+        const algebra = results.Algebra[Math.floor(Math.random()*results.Algebra.length)];
+        const calculus = results.Calculus[Math.floor(Math.random()*results.Calculus.length)];
+        res.render('layouts/main', {html: calculus.latex});
     });
 })
 
