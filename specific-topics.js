@@ -11,7 +11,7 @@ module.exports = () => {
             }
             console.log(err);
         }).then((problems) => {
-            specificTopics['Algebra'] = problems.filter(problem => problem.title == 'Quadratic Equation Test 2');
+            specificTopics['Algebra'] = problems.filter(problem => problem.title == 'Algebra');
             specificTopics['Calculus'] = problems.filter(problem => problem.title == 'Calculus');
             specificTopics['Any'] = problems.filter(problem => problem.title != 'Calculus' || problem.title != 'Algebra');
             return specificTopics

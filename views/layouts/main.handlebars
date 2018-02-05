@@ -14,14 +14,37 @@
                 <p class="text">Generate</p>
                 <p class="text">Random Math Problems</p>
             </div>
-            <div class="title">
+
+            <div class="any">
                 <div id="titleElement" class="slideFromRight">
-                    {{{title}}}
+                    Any
                 </div>
             </div>
-            <div class="problem">
+            <div class="anyProblem">
                 <div id="latexElement" class="slideFromLeft">
-                    {{{html}}}
+                    {{{any}}}
+                </div>
+            </div>
+
+            <div class="algebra">
+                <div id="titleElement" class="slideFromRight">
+                    Algebra
+                </div>
+            </div>
+            <div class="algebraProblem">
+                <div id="latexElement" class="slideFromLeft">
+                    {{{algebra}}}
+                </div>
+            </div>
+
+            <div class="calculus">
+                <div id="titleElement" class="slideFromRight">
+                    Calculus
+                </div>
+            </div>
+            <div class="calculusProblem">
+                <div id="latexElement" class="slideFromLeft">
+                    {{{calculus}}}
                 </div>
             </div>
         </div>
@@ -31,11 +54,15 @@
         .wrapper {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: 200px 50px 100px 100px;
+            grid-template-rows: 200px 50px 100px 50px 100px 50px 100px 100px;
             grid-template-areas:  "b b b b"
-                                  "t t t t"
-                                  "p p p p"
-                                  "c c c c";
+                                  "a a a a"
+                                  "a-p a-p a-p a-p"
+                                  "al al al al"
+                                  "al-p al-p al-p al-p"
+                                  "c c c c"
+                                  "c-p c-p c-p c-p"
+                                  "x x x x";
             margin-top: 25px;
             font-family: 'Montserrat', sans-serif;
         }
@@ -50,20 +77,41 @@
             margin: 0;
             width: 50%;
         }
-        .title {
-            grid-area: t;
-            position: relative;
-        }
         #titleElement {
             position: absolute;
             left: 25%;
             top: 75px;
             font-size: 25px;
         }
-        .problem {
-            grid-area: p;
+
+
+        .any {
+            grid-area: a;
             position: relative;
         }
+        .anyProblem {
+            grid-area: a-p;
+            position: relative;
+        }
+
+        .algebra {
+            grid-area: al;
+            position: relative;
+        }
+        .algebraProblem {
+            grid-area: al-p;
+            position: relative;
+        }
+
+        .calculus {
+            grid-area: c;
+            position: relative;
+        }
+        .calculusProblem {
+            grid-area: c-p;
+            position: relative;
+        }
+
         #latexElement {
             position: absolute;
             right: 25%;
