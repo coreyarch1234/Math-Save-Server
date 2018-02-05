@@ -11,7 +11,8 @@
     <body>
         <div class="wrapper">
             <div class="banner">
-                Generate Random Math Problems from Actual Students
+                <p class="title">Generate</p>
+                <p class="title">Random Math Problems</p>
             </div>
             <div class="problem">
                 <div id="latexElement">
@@ -25,7 +26,7 @@
         .wrapper {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: 100px 200px 100px;
+            grid-template-rows: 200px 300px 100px;
             grid-template-areas:  "b b b b"
                                   "p p p p"
                                   "c c c c";
@@ -34,10 +35,14 @@
         }
         .banner {
             grid-area: b;
-            position: absolute;
-            left: 30%;
-            top: 75px;
-            font-size: 20px
+            position: relative;
+            left: 25%;
+            padding-top: 50px;
+        }
+        .title {
+            font-size: 45px;
+            margin: 0;
+            width: 50%;
         }
         .problem {
             grid-area: p;
