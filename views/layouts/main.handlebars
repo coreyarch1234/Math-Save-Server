@@ -15,7 +15,7 @@
                 <p class="title">Random Math Problems</p>
             </div>
             <div class="problem">
-                <div id="latexElement">
+                <div id="latexElement" class="slidein">
                     {{{html}}}
                 </div>
             </div>
@@ -53,6 +53,21 @@
             left: 25%;
             top: 75px;
             font-size: 20px;
+        }
+
+        .slidein {
+            animation-duration: 2s;
+            animation-name: slidein;
+        }
+
+        @keyframes slidein {
+          from {
+            margin-left: 100%;
+          }
+
+          to {
+            margin-left: 0%;
+          }
         }
     </style>
 
