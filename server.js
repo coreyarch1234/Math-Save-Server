@@ -62,39 +62,10 @@ app.get('/generate', (req, res) => {
 
         Problem.findOne().skip(random).exec((err, problem) => {
             var renderedLatex = katex.renderToString(problem.latex);
-            res.render('layouts/main', {html: renderedLatex});
+            res.render('layouts/main', {html: renderedLatex, title: problem.title});
         })
     });
 })
-
-
-
-// app.get('/', (req, res) => {
-//
-//     var newProblems = []
-//
-//     Problem.find({}).sort({_id:-1}).exec((err,problems) => {
-//         if (err) {
-//             console.log(err);
-//         }else{
-//             for (problem of problems){
-//                 console.log(problem)
-//
-//                 var renderedLatex = katex.renderToString(problem.latex);
-//                 newProblems.push({
-//                     title: problem.title,
-//                     topic: problem.topic,
-//                     latex: problem.latex,
-//                     renderedLatex: renderedLatex
-//                 });
-//
-//             }
-//             console.log('THE NEW PROBLEM ARRAY IS: ' + newProblems);
-//             res.send(newProblems);
-//         }
-//     })
-//
-// });
 
 
 app.post('/latex', (req, res) => {
