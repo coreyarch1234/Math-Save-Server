@@ -63,29 +63,13 @@ app.get('/generate', (req, res) => {
         const any = results.Any[Math.floor(Math.random()*results.Any.length)];
         const algebra = results.Algebra[Math.floor(Math.random()*results.Algebra.length)];
         const calculus = results.Calculus[Math.floor(Math.random()*results.Calculus.length)];
-        
+
         const anyRendered = any !== undefined ? katex.renderToString(any.latex) : '';
         const algebraRendered = algebra !== undefined ? katex.renderToString(algebra.latex) : '';
         const calculusRendered = calculus !== undefined ? katex.renderToString(calculus.latex) : '';
 
         res.render('layouts/main', {any: anyRendered, algebra: algebraRendered, calculus: calculusRendered});
     })
-    // Problem.count().exec((err, count) => {
-    //     // Get a random entry
-    //     var random = Math.floor(Math.random() * count);
-    //
-    //     Problem.findOne().skip(random).exec((err, problem) => {
-    //         var renderedLatex = katex.renderToString(problem.latex);
-    //         var topicPromise = specificTopics();
-    //         topicPromise.then((results) => {
-    //             console.log((results.Any))
-    //             res.render('layouts/main', {html: (results.Any)[0].latex});
-    //         })
-    //         // topicPromise.then((results) => console.log(results.Algebra));
-    //         // res.render('layouts/main', {html: renderedLatex, title: problem.title});
-    //     })
-    // });
-
 })
 
 
